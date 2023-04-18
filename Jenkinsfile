@@ -1,10 +1,6 @@
 pipeline {
 
-  agent {
-    kubernetes {
-      yamlFile 'nginx.yaml'
-    }
-  }
+  agent { label 'kubeconfig' }
 
   stages {
 
@@ -14,10 +10,10 @@ pipeline {
       }
     }
 
-    stage('Deploy App to Kubernetes') {     
+    stage('Deploy App') {
       steps {
         script {
-          withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]
+          withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')])
         }
       }
     }
