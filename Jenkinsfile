@@ -1,6 +1,10 @@
 pipeline {
 
-  agent { label 'kubepod' }
+  agent {
+    kubernetes {
+      yamlFile 'nginx.yaml'
+    }
+  }
 
   stages {
 
